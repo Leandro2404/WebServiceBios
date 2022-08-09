@@ -99,7 +99,8 @@
         $sql->bindValue(2,$idParte);
         $sql->bindValue(3,$idOrden);
         $sql->bindValue(4,$descripcion);
-        $sql->execute();
+        $sql->execute(); 
+        
 
       }
 
