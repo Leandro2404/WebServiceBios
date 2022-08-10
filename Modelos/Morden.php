@@ -69,7 +69,7 @@
         }
 
       }
-      public function actualizaParteOrden($idParte ,$tareaDesarrollada,$fechaInicio,$fechaFin,$completa){
+      public function actualizaParteOrden($idParte ,$tareaDesarrollada,$fechaInicio,$fechaFin,$completa, $estado){
         $conectar= parent::conexion();
         parent::set_names();
         $sql="UPDATE `parteorden` SET
@@ -77,13 +77,15 @@
         `FechaInicio`=?,
         `FechaFin`=?,
         `Completa`=?
+        `Estado`=?
          WHERE `IdParte`=?";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$tareaDesarrollada);
         $sql->bindValue(2,$fechaInicio);
         $sql->bindValue(3,$fechaFin);
         $sql->bindValue(4,$completa);
-        $sql->bindValue(5,$idParte);
+        $sql->bindValue(5,$estado);
+        $sql->bindValue(6,$idParte);
         $sql->execute();
 
       }
@@ -99,7 +101,12 @@
         $sql->bindValue(2,$idParte);
         $sql->bindValue(3,$idOrden);
         $sql->bindValue(4,$descripcion);
+<<<<<<< Updated upstream
         $sql->execute();
+=======
+        $sql->execute(); 
+
+>>>>>>> Stashed changes
 
       }
 
