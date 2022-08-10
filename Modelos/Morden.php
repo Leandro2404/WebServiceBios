@@ -69,21 +69,32 @@
         }
 
       }
-      public function actualizaParteOrden($idParte ,$tareaDesarrollada,$fechaInicio,$fechaFin,$completa){
+      public function actualizaParteOrden($idParte ,$tareaDesarrollada,$fechaInicio,$fechaFin,$completa, $estado){
         $conectar= parent::conexion();
         parent::set_names();
         $sql="UPDATE `parteorden` SET
         `TareaDesarrollada`=?,
         `FechaInicio`=?,
         `FechaFin`=?,
-        `Completa`=?
+        `Completa`=?,
+        `Estado`=?
          WHERE `IdParte`=?";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$tareaDesarrollada);
-        $sql->bindValue(2,$fechaInicio);
-        $sql->bindValue(3,$fechaFin);
+
+        if($fechaInicio == null)
+          $sql->bindValue(2,null);
+        else
+          $sql->bindValue(2,$fechaInicio);
+          
+        if($fechaFin == null)
+          $sql->bindValue(3,null);
+        else
+          $sql->bindValue(3,$fechaFin);
+
         $sql->bindValue(4,$completa);
-        $sql->bindValue(5,$idParte);
+        $sql->bindValue(5,$estado);
+        $sql->bindValue(6,$idParte);
         $sql->execute();
 
       }
@@ -101,6 +112,7 @@
         $sql->bindValue(4,$descripcion);
         $sql->execute(); 
         
+
 
       }
 
@@ -127,6 +139,7 @@
 
         return $resultado;
 
+        //asdas
       }
 
 

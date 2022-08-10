@@ -50,9 +50,9 @@
       break;*/
       case 'Guardar':
 
-        $json = json_encode($body["ParteOrden"]);
+       $json = json_encode($body["ParteOrden"]);
        $data =  json_decode($json,true);
-       $orden->actualizaParteOrden($data["IdParte"],$data["TareaDesarrollada"],$data["FechaInicio"],$data["FechaFin"],$data["Completa"]);
+       $orden->actualizaParteOrden($data["IdParte"],$data["TareaDesarrollada"],$data["FechaInicio"],$data["FechaFin"],$data["Completa"], $data["Estado"]);
        $cantMat= count($body["Materiales"]);
        
          for ($i=0; $i < $cantMat ; $i++) {
@@ -66,8 +66,6 @@
              }
              $json = json_encode($body,true) ;
              echo $json;
-       
-
            /*$json = json_encode($body,true) ;
            echo $json;
            $orden->json($json);*/
@@ -92,8 +90,6 @@
                       }else{
                           array_push($testArray, (int)$mat);
                       }
-
-
             }
             $body["IdPartes"]=$testArray;
 
