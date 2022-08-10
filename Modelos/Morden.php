@@ -101,12 +101,8 @@
         $sql->bindValue(2,$idParte);
         $sql->bindValue(3,$idOrden);
         $sql->bindValue(4,$descripcion);
-<<<<<<< Updated upstream
         $sql->execute();
-=======
-        $sql->execute(); 
 
->>>>>>> Stashed changes
 
       }
 
