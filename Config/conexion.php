@@ -7,11 +7,11 @@
 
       protected function Conexion(){
             try {
-              $conectar = $this->dbh =    new PDO("mysql: local=localhost; dbname=u198557509_Testing",    "u198557509_Test",        "Galtech2022");
-              //$conectar = $this->dbh = new PDO("mysql: local=localhost; dbname=u198557509_biosgastro", "u198557509_biosgastro",  "Galtech2022");
+              //$conectar = $this->dbh =    new PDO("mysql: local=localhost; dbname=u198557509_Testing",    "u198557509_Test",        "Galtech2022");
+              $conectar = $this->dbh = new PDO("mysql: local=localhost; dbname=u198557509_biosgastro", "u198557509_biosgastro",  "Galtech2022");
               return $conectar;
 
-            } catch (Exception $e) {
+            }catch (Exception $e) {
               print "Error Base de Datos!". $e->getMessage(). "<br/>";
               die();
             }
