@@ -76,7 +76,7 @@
         `TareaDesarrollada`=?,
         `FechaInicio`=?,
         `FechaFin`=?,
-        `Completa`=?
+        `Completa`=?,
         `Estado`=?
          WHERE `IdParte`=?";
         $sql=$conectar->prepare($sql);
