@@ -83,14 +83,14 @@
         $sql->bindValue(1,$tareaDesarrollada);
 
         if($fechaInicio == null)
-          $sql->bindValue(2,$fechaInicio);
-        else
           $sql->bindValue(2,null);
+        else
+          $sql->bindValue(2,$fechaInicio);
           
         if($fechaFin == null)
-          $sql->bindValue(3,$fechaFin);
-        else
           $sql->bindValue(3,null);
+        else
+          $sql->bindValue(3,$fechaFin);
 
         $sql->bindValue(4,$completa);
         $sql->bindValue(5,$estado);
