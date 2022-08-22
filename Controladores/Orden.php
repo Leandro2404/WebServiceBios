@@ -58,11 +58,14 @@
          for ($i=0; $i < $cantMat ; $i++) {
                    $json = json_encode($body["Materiales"][$i]);
                    $mat = json_decode($json);
-                     $orden->insertaMateriales($mat->Cantidad,$mat->IdParte,$mat->IdOrden,$mat->Descripcion);
+                   if($orden->get_material($mat->IdMat, $mat->Descripcion, $mat->Precio, $mat->IdParte, $mat->IdOrden)){
+                    $orden->insertaMateriales($mat->Cantidad,$mat->IdParte,$mat->IdOrden, $mat->Descripcion, $mat->Precio, $mat->IdMat);
                     /*echo    $mat->cantidad."-";
                     echo    $mat->descripcion."-";
                     echo    $mat->idParte."-";
                     echo    $mat->idOrden."\n";*/
+                   }
+               
              }
              $json = json_encode($body,true) ;
              echo $json;
