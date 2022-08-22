@@ -108,7 +108,7 @@
         parent::set_names();
           $sql="INSERT INTO `material`
         (`Cantidad`, `IdParte`, `IdOrden`,`Descripcion`, `Precio`, `IdCelular`)
-        VALUES (?,?,?,?,?)";
+        VALUES (?,?,?,?,?,?)";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$cantidad);
         $sql->bindValue(2,$idParte);
