@@ -69,6 +69,9 @@
         }
 
       }
+
+
+
       public function actualizaParteOrden($idParte ,$tareaDesarrollada,$fechaInicio,$fechaFin,$completa, $estado){
         $conectar= parent::conexion();
         parent::set_names();
@@ -99,20 +102,44 @@
 
       }
 
-      public function insertaMateriales($cantidad ,$idParte,$idOrden,$descripcion){
-        $conectar= parent::conexion();
+      public function insertaMateriales($cantidad ,$idParte,$idOrden,$descripcion, $precio, $idCelular){
+
+          $conectar= parent::conexion();
         parent::set_names();
           $sql="INSERT INTO `material`
-        (`Cantidad`, `IdParte`, `IdOrden`,`Descripcion` )
-        VALUES (?,?,?,?)";
+        (`Cantidad`, `IdParte`, `IdOrden`,`Descripcion`, `Precio`, `IdCelular`)
+        VALUES (?,?,?,?,?,?)";
         $sql=$conectar->prepare($sql);
         $sql->bindValue(1,$cantidad);
         $sql->bindValue(2,$idParte);
         $sql->bindValue(3,$idOrden);
         $sql->bindValue(4,$descripcion);
-        $sql->execute(); 
-        
 
+        $sql->bindValue(5,$precio);
+        $sql->bindValue(6,$idCelular);
+        $sql->execute();
+      
+      }
+
+
+      public function get_material($idCelular, $descripcion, $precio, $idParte, $idOrden){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="SELECT IdMat FROM material WHERE IdCelular = ? and Descripcion = ? and Precio = ? and IdParte = ? and IdOrden = ?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$idCelular,PDO::PARAM_INT);
+        $sql->bindValue(2,$descripcion);
+        $sql->bindValue(3,$precio);
+        $sql->bindValue(4,$idParte);
+        $sql->bindValue(5,$idOrden);
+        $sql->execute();
+
+        $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+        if($resultado != null ){
+          return false;
+        }else{
+          return true;
+        }
 
       }
 
