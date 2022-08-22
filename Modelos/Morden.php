@@ -115,10 +115,9 @@
         $sql->bindValue(3,$idOrden);
         $sql->bindValue(4,$descripcion);
         $sql->bindValue(5,$precio);
+        $sql->bindValue(6,$idCelular);
         $sql->execute();
-        
-
-
+      
       }
 
 
