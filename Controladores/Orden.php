@@ -64,9 +64,9 @@
                     echo    $mat->descripcion."-";
                     echo    $mat->idParte."-";
                     echo    $mat->idOrden."\n";*/
-                    echo "entre al bucle";
+                    
                    }
-                   else{echo "no entre al bucle";}
+                   
                
              }
              $json = json_encode($body,true) ;
