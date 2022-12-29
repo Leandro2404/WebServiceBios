@@ -168,6 +168,23 @@
         //asdas
       }
 
+      public function update_token($dni ,$token){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="UPDATE biosgastro.tecnico
+              SET TokenMobile=?
+              WHERE Dni=?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$token);
+        $sql->bindValue(2,$dni);
+        $sql->execute();
+
+
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+      }
+
+
+
 
 
 

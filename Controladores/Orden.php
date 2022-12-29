@@ -34,6 +34,11 @@
           echo json_encode($datos);
       break;
 
+      case 'UpdateToken':
+        $datos=$orden->update_token($body["DNI"], $body["Token"]);
+        echo json_encode($datos);
+      break;
+
       /*case 'Guardar':
 
         $json = json_encode($body["ParteOrden"]);
@@ -54,7 +59,6 @@
        $data =  json_decode($json,true);
        $orden->actualizaParteOrden($data["IdParte"],$data["TareaDesarrollada"],$data["FechaInicio"],$data["FechaFin"],$data["Completa"], $data["Estado"]);
        $cantMat= count($body["Materiales"]);
-       
          for ($i=0; $i < $cantMat ; $i++) {
                    $json = json_encode($body["Materiales"][$i]);
                    $mat = json_decode($json);
@@ -66,8 +70,6 @@
                     echo    $mat->idOrden."\n";*/
                     
                    }
-                   
-               
              }
              $json = json_encode($body,true) ;
              echo $json;
