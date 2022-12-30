@@ -183,6 +183,20 @@
         return $resultado="Ok";
       }
 
+      public function sendNoti($dni){
+        $conectar= parent::conexion();
+        parent::set_names();
+          $sql="SELECT TokenMobile FROM tecnico WHERE Dni=? AND Activo=1;";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$dni);
+        $sql->execute();
+        $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado;
+
+
+      }
+
 
 
 

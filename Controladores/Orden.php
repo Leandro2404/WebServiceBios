@@ -39,6 +39,11 @@
         echo json_encode($datos);
       break;
 
+      case 'SendNotification':
+        $datos=$orden->sendNoti($body["DNI"]);
+        echo json_encode($datos);
+      break;
+
       /*case 'Guardar':
 
         $json = json_encode($body["ParteOrden"]);
