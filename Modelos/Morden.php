@@ -186,6 +186,7 @@
       public function sendNoti($dni){
         $key = "key=AAAAlA3B7UA:APA91bFS06f1IiFI-lKapyGDDBD-lOxbNR4ercCwY2NerBnuhZbuXK0dHe0SWlIi13RgnljFyEbWM3peJlHHzUpb66G85UrdiDUD_5gDHh1L-HxOocBjwG36k9dSw8t_bGgGtMgz_3cM";
 
+        echo $key;
 
         $conectar= parent::conexion();
         parent::set_names();
@@ -208,6 +209,8 @@
              ] 
        ];
 
+       echo $bodyNoti;
+
        $headers = [
         'Content-type: application/json',
         'Authorization: ' +$key,
@@ -229,7 +232,7 @@
           
           //execute post
           $result = curl_exec($ch);
-          echo $headers;
+          return $headers;
 
 
       }
