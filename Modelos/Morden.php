@@ -180,7 +180,7 @@
         $sql->execute();
 
 
-        return $resultado="Ok";
+        return "Ok";
       }
 
       public function sendNoti($dni){
@@ -200,8 +200,8 @@
         // use key 'http' even if you send the request to https://...
         $fields = array(
             'to' => $token,
-            'notification' => array("body" => "testing de notificaciones1", 
-            "title" => "FCM Message")
+            'notification' => array("body" => "Tienes ordenes nuevas", 
+            "title" => "Coolsoft")
         );
     
         $headers = array(
@@ -225,7 +225,7 @@
         }
         curl_close($ch);
 
-        return $result;
+        return json_decode($result);
 
 
       }
