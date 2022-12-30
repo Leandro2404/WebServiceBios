@@ -24,7 +24,7 @@
       public function update_parte_orden($FechaInicio, $FechaFin ,$TareaDesarrollada ,$IdParte,$Completada ,$IdOrden){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="UPDATE biosgastro.parteorden
+        $sql="UPDATE parteorden
               SET FechaInicio=?, FechaFin= ?,
               TareaDesarrollada=?, Completa=1
               WHERE IdParte= ?";
@@ -41,7 +41,7 @@
       public function update_orden($Completada ,$IdOrden){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="UPDATE biosgastro.orden
+        $sql="UPDATE orden
               SET Completada=?
               WHERE IdOrden=?";
         $sql=$conectar->prepare($sql);
@@ -168,6 +168,70 @@
 
         //asdas
       }
+
+      public function update_token($dni ,$token){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql="UPDATE tecnico
+              SET TokenMobile=?
+              WHERE Dni=?";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$token);
+        $sql->bindValue(2,$dni);
+        $sql->execute();
+
+
+        return "Ok";
+      }
+
+      public function sendNoti($dni){
+
+        $conectar= parent::conexion();
+        parent::set_names();
+          $sql="SELECT TokenMobile FROM tecnico WHERE Dni=? AND Activo=1;";
+        $sql=$conectar->prepare($sql);
+        $sql->bindValue(1,$dni);
+        $sql->execute();
+        $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+
+        $token = $resultado["TokenMobile"];
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+
+        // use key 'http' even if you send the request to https://...
+        $fields = array(
+            'to' => $token,
+            'notification' => array("body" => "Tienes ordenes nuevas", 
+            "title" => "Coolsoft")
+        );
+    
+        $headers = array(
+            'Authorization:key = AAAAlA3B7UA:APA91bFS06f1IiFI-lKapyGDDBD-lOxbNR4ercCwY2NerBnuhZbuXK0dHe0SWlIi13RgnljFyEbWM3peJlHHzUpb66G85UrdiDUD_5gDHh1L-HxOocBjwG36k9dSw8t_bGgGtMgz_3cM', //Change API KEY HERE
+            'Content-Type: application/json'
+        );
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        
+        $result = curl_exec($ch);           
+    
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+        curl_close($ch);
+
+        return json_decode($result);
+
+
+      }
+
+
 
 
 
