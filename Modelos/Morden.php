@@ -229,7 +229,7 @@
           
           //execute post
           $result = curl_exec($ch);
-          echo $result;
+          echo $headers;
 
 
       }
