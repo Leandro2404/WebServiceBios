@@ -232,7 +232,8 @@
           
           //execute post
           $result = curl_exec($ch);
-          return $headers;
+          
+          return $result;
 
 
       }
