@@ -199,7 +199,7 @@
 
         // use key 'http' even if you send the request to https://...
         $fields = array(
-            'registration_ids' => $token,
+            'to' => $token,
             'notification' => array("body" => "testing de notificaciones1", 
             "title" => "FCM Message")
         );
@@ -224,7 +224,7 @@
             die('Curl failed: ' . curl_error($ch));
         }
         curl_close($ch);
-        
+
         return $result;
 
 
