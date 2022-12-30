@@ -192,7 +192,35 @@
         $sql->execute();
         $resultado=$sql->fetch(PDO::FETCH_ASSOC);
 
-        return $resultado["TokenMobile"];
+        $token = $resultado["TokenMobile"];
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $data = array('to' => $token, 'key2' => 'value2');
+
+        $bodyNoti = [
+          "to" => $token, 
+          "notification" => [
+                "body" => "testing de notificaciones1", 
+                "title" => "FCM Message" 
+             ] 
+       ];
+
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+          'http' => array(
+              'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+              'method'  => 'POST',
+              'content' => http_build_query($bodyNoti)
+          )
+
+
+           
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) { /* Handle error */ }
+
+        return var_dump($result);
 
 
       }
