@@ -210,7 +210,7 @@
 
        $headers = [
         'Content-type: application/json',
-        'Authorization:' +$key,
+        'Authorization: ' +$key,
        ];
 
         // use key 'http' even if you send the request to https://...
