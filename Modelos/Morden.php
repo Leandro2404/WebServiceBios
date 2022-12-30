@@ -192,7 +192,7 @@
         $sql->execute();
         $resultado=$sql->fetch(PDO::FETCH_ASSOC);
 
-        return $resultado;
+        return $resultado["TokenMobile"];
 
 
       }
