@@ -24,7 +24,7 @@
       public function update_parte_orden($FechaInicio, $FechaFin ,$TareaDesarrollada ,$IdParte,$Completada ,$IdOrden){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="UPDATE biosgastro.parteorden
+        $sql="UPDATE parteorden
               SET FechaInicio=?, FechaFin= ?,
               TareaDesarrollada=?, Completa=1
               WHERE IdParte= ?";
@@ -41,7 +41,7 @@
       public function update_orden($Completada ,$IdOrden){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="UPDATE biosgastro.orden
+        $sql="UPDATE orden
               SET Completada=?
               WHERE IdOrden=?";
         $sql=$conectar->prepare($sql);
@@ -171,7 +171,7 @@
       public function update_token($dni ,$token){
         $conectar= parent::conexion();
         parent::set_names();
-        $sql="UPDATE biosgastro.tecnico
+        $sql="UPDATE tecnico
               SET TokenMobile=?
               WHERE Dni=?";
         $sql=$conectar->prepare($sql);
@@ -180,7 +180,7 @@
         $sql->execute();
 
 
-        return $resultado=$sql;
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
       }
 
 
