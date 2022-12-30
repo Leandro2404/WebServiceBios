@@ -184,6 +184,9 @@
       }
 
       public function sendNoti($dni){
+        $key = "key=AAAAlA3B7UA:APA91bFS06f1IiFI-lKapyGDDBD-lOxbNR4ercCwY2NerBnuhZbuXK0dHe0SWlIi13RgnljFyEbWM3peJlHHzUpb66G85UrdiDUD_5gDHh1L-HxOocBjwG36k9dSw8t_bGgGtMgz_3cM";
+
+
         $conectar= parent::conexion();
         parent::set_names();
           $sql="SELECT TokenMobile FROM tecnico WHERE Dni=? AND Activo=1;";
@@ -205,6 +208,11 @@
              ] 
        ];
 
+       $headers = [
+        'Content-type: application/json',
+        'Authorization:' +$key,
+       ];
+
         // use key 'http' even if you send the request to https://...
           $fields_string = http_build_query($bodyNoti);
 
@@ -212,12 +220,12 @@
           $ch = curl_init();
           
           //set the url, number of POST vars, POST data
-          curl_setopt($ch,CURLOPT_URL, $url);
+          curl_setopt($ch,CURLOPT_URL, $url+);
           curl_setopt($ch,CURLOPT_POST, true);
           curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
           
           //So that curl_exec returns the contents of the cURL; rather than echoing it
-          curl_setopt($ch,CURLOPT_RETURNTRANSFER, true); 
+          curl_setopt($ch,CURLOPT_RETURNTRANSFER, $headers); 
           
           //execute post
           $result = curl_exec($ch);
