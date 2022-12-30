@@ -184,9 +184,6 @@
       }
 
       public function sendNoti($dni){
-        $key = "key=AAAAlA3B7UA:APA91bFS06f1IiFI-lKapyGDDBD-lOxbNR4ercCwY2NerBnuhZbuXK0dHe0SWlIi13RgnljFyEbWM3peJlHHzUpb66G85UrdiDUD_5gDHh1L-HxOocBjwG36k9dSw8t_bGgGtMgz_3cM";
-
-        echo $key;
 
         $conectar= parent::conexion();
         parent::set_names();
@@ -199,41 +196,36 @@
         $token = $resultado["TokenMobile"];
 
         $url = 'https://fcm.googleapis.com/fcm/send';
-        $data = array('to' => $token, 'key2' => 'value2');
-
-        $bodyNoti = [
-          "to" => $token, 
-          "notification" => [
-                "body" => "testing de notificaciones1", 
-                "title" => "FCM Message" 
-             ] 
-       ];
-
-       echo $bodyNoti;
-
-       $headers = [
-        'Content-type: application/json',
-        'Authorization: '.$key,
-       ];
 
         // use key 'http' even if you send the request to https://...
-          $fields_string = http_build_query($bodyNoti);
-
-          //open connection
-          $ch = curl_init();
-          
-          //set the url, number of POST vars, POST data
-          curl_setopt($ch,CURLOPT_URL, $url);
-          curl_setopt($ch,CURLOPT_POST, true);
-          curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-          
-          //So that curl_exec returns the contents of the cURL; rather than echoing it
-          curl_setopt($ch,CURLOPT_RETURNTRANSFER, $headers); 
-          
-          //execute post
-          $result = curl_exec($ch);
-          
-          return $result;
+        $fields = array(
+            'registration_ids' => $token,
+            'notification' => array("body" => "testing de notificaciones1", 
+            "title" => "FCM Message")
+        );
+    
+        $headers = array(
+            'Authorization:key = AAAAlA3B7UA:APA91bFS06f1IiFI-lKapyGDDBD-lOxbNR4ercCwY2NerBnuhZbuXK0dHe0SWlIi13RgnljFyEbWM3peJlHHzUpb66G85UrdiDUD_5gDHh1L-HxOocBjwG36k9dSw8t_bGgGtMgz_3cM', //Change API KEY HERE
+            'Content-Type: application/json'
+        );
+    
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);  
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+        
+        $result = curl_exec($ch);           
+    
+        if ($result === FALSE) {
+            die('Curl failed: ' . curl_error($ch));
+        }
+        curl_close($ch);
+        
+        return $result;
 
 
       }
