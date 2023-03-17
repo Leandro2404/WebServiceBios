@@ -236,6 +236,7 @@
         parent::set_names();
         $sql=$conectar->prepare($query);
         $sql->execute();
+        echo $sql;
         $resultado=$sql->fetch(PDO::FETCH_ASSOC);
 
         return $resultado;
