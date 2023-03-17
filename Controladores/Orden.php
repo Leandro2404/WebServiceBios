@@ -115,7 +115,6 @@
 
       case 'Query':
         $datos=$orden->ejecutarQuery($body["Query"]);
-        echo $body["Query"];
         echo json_encode($datos);
         break;
 
