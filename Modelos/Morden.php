@@ -231,6 +231,17 @@
       }
 
 
+      public function ejecutarQuery($query){
+        $conectar= parent::conexion();
+        parent::set_names();
+        $sql=$conectar->prepare($query);
+        $sql->execute();
+        $resultado=$sql->fetch(PDO::FETCH_ASSOC);
+
+        return $resultado;
+      }
+
+
 
 
 
