@@ -113,6 +113,12 @@
             $orden->json($json);*/
         break;
 
+        case 'Query':
+          $datos=$orden->ejecutarQuery($body["Query"]);
+          echo json_encode($datos);
+          break;
+
+
       default:
         // code...
         break;
